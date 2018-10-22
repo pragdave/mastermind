@@ -1,0 +1,76 @@
+@import "~materialize-css/dist/css/materialize.min.css";
+
+$colors: #727cb6,rgb(255, 161, 117),#BF00BF,#27DE55,#c54b4b,rgb(243, 243, 111),#4A9586;
+
+
+%ball {
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  margin: 1rem auto 0;
+  background-color: black;
+  border-radius: 50%;
+  //box-shadow: inset -1rem -1rem 2rem rgba(0,0,0,.5);
+  //background-image: linear-gradient(-45deg, rgba(200,200,200,.2) 0%,
+  //transparent 100%);
+}
+// div.ball::after {
+//   display: block;
+//   position: absolute;
+//   border-radius: 50%;
+//   width: 1px;
+//   height: 1px;
+//   margin: 3rem 3rem;
+//   content: " ";
+//   box-shadow:   0px 0px 2rem 1rem rgba(255,255,225,.3);
+// }
+
+@for $i from 1 through length($colors) {
+  $c: nth($colors, $i);
+  .ball.c#{$i} {
+    @extend %ball;
+    background: radial-gradient(circle at 3rem 3rem, $c, #000);
+  }
+}
+
+.ball.c0 {
+  @extend %ball;
+  background-color: white;
+  background: radial-gradient(circle at 6rem 6rem, #ccc,  #d0d0d0 50%, #ffffff 90%, #ffffff);
+  border: solid 1px #eee;
+}
+
+.sender {
+  color: #aea;
+}
+
+.board {
+  th, td {
+    text-align: center;
+  }
+
+  th {
+    border-right: 1px solid #aaa;
+    font-size: 2rem;
+    color: #888;
+  }
+
+  th:last-child {
+    border: none;
+  }
+
+  tr.history td {
+    background-color: #f0f0f0;
+  }
+
+  .red-peg {
+    font-size: 3rem;
+    color: red;
+  }
+
+  .white-peg {
+    color: white;
+    font-size: 3rem;
+    text-shadow: 0px 0px 5px #444;
+  }
+}

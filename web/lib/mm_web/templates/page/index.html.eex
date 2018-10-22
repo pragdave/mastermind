@@ -1,0 +1,62 @@
+
+<div id="app" >
+
+<div class="row">
+  <section id="sources" class="col s2">
+    <div v-for="color in game.colors" v-bind:class="color">
+      <div v-bind:class="'ball c' + color"
+           draggable="true"
+           ondragstart="Dragger.start(event);"
+           v-bind:data-color="'' + color">
+           </div>
+    </div>
+  </section>
+
+  <div class="col s9 offset-s1">
+    <table class="board">
+      <thead>
+      <tr>
+      <th v-for="i in game.width">
+        {{ i }}
+        </th>
+        <th>
+        Score
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+
+        <tr v-for="move in game.moves" class="history">
+          <td v-for="i in move.guess">
+            <div v-bind:class="'ball c' + i">
+            </div>
+          </td>
+          <td>
+          <p>
+          <i v-for="i in move.score.reds" class="material-icons red-peg">radio_button_checked</i>
+          </p>
+          <p>
+          <i v-for="i in move.score.whites" class="material-icons white-peg">radio_button_checked</i>
+          </p>
+          </td>
+        </tr>
+
+        <tr id="inputs">
+        <td v-for="i in game.width">
+        <div v-bind:class="'ball c' + guess[i-1]"
+             ondrop="Dragger.drop(event);"
+             ondragover="Dragger.dragover(event);"
+             v-bind:data-column="i">
+        </div>
+        </td>
+        <td>
+          <a :disabled="notAllGuessesFilled()"
+             class="btn-floating btn-large waves-effect waves-light green"
+             v-on:click="makeGuess(guess)">
+            <i class="material-icons">send</i>
+          </a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
